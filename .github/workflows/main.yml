@@ -26,3 +26,6 @@ jobs:
         SOURCE: "php/" # Change this to the directory where your PHP files are located
         TARGET: "/var/www/html/" # Change this to the directory on your droplet
         EXCLUDE: "/.github/"
+        SCRIPT_BEFORE: |
+          whoami
+          ls -al
