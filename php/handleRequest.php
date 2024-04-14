@@ -1,9 +1,7 @@
 <?php
-require 'OpenLDBWS.php';
-include 'connection.php';
-//new chang
 
-//new change
+include 'connection.php';
+
 // $departure = $_POST['departure'];
 // $destination = $_POST['destination'];
 ini_set('display_errors', 1);
