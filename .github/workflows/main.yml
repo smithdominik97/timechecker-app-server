@@ -22,6 +22,6 @@ jobs:
         REMOTE_HOST: ${{ secrets.DROPLET_IP }}
         REMOTE_USER: ${{ secrets.DROPLET_USERNAME }}
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        SOURCE: "." # Change this to the directory where your PHP files are located
+        SOURCE: "php/" # Change this to the directory where your PHP files are located
         TARGET: "/var/www/html/" # Change this to the directory on your droplet
         EXCLUDE: "/.github/"
