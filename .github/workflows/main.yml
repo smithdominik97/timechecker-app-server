@@ -1,0 +1,26 @@
+name: Deploy to DigitalOcean
+
+on:
+  push:
+    branches:
+      - main # Change this to your branch name
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install rsync
+      run: sudo apt-get update && sudo apt-get install -y rsync
+
+    - name: Deploy via SSH
+      uses: easingthemes/ssh-deploy@v2.0.0
+      with:
+        server_ip: ${{ secrets.DROPLET_IP }}
+        server_username: ${{ secrets.DROPLET_USERNAME }}
+        ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+        source: "." # Change this to the directory where your PHP files are located
+        destination: "/var/www/html/" # Change this to the directory on your droplet
