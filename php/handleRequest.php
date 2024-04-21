@@ -14,7 +14,7 @@ $OpenLDBWS = $conn->connect();
 $response = $OpenLDBWS->GetDepartureBoard(10,"DEE");
 $departures = $OpenLDBWS->GetDepBoardWithDetails(1,"DEE", "EGY");
 $arrivals = $OpenLDBWS->GetArrBoardWithDetails(1, "EGY");
-
+$departureLocation = "EGY";
 $serviceId = null;
 
 //$response = $OpenLDBWS->GetNextDepartures("DEE", "EGY", 120, 120);
@@ -28,6 +28,15 @@ if($response == null){
     echo "Departure: \n";
     echo "  Departure from: " . $departures->GetStationBoardResult->locationName . " leaves at: " . $departures->GetStationBoardResult->trainServices->service[0]->std;
     echo "\nArrival: \n"; 
-    echo "  Arrival from: " . $departures->GetStationBoardResult->locationName . " arrives at: " . $departures->GetStationBoardResult->trainServices->service[0]->subsequentCallingPoints->callingPointList[0]->callingPoint[10]->st; 
+    echo "  Arrival from: " . $departures->GetStationBoardResult->locationName . " arrives at: " . $departures->GetStationBoardResult->trainServices->service[0]->subsequentCallingPoints->callingPointList[0]->callingPoint[6]->st;
+
+
+
+    foreach ($departures->GetStationBoardResult->trainServices->service[0]->subsequentCallingPoints->callingPointList[0]->callingPoint as $arrival) {
+                if ($arrival->crs == $departureLocation) {
+                    echo " Arrival from: " . $arrival->locationName . " arrives at: " . $arrival->st;
+                }
+ 
+    } 
   }
 
