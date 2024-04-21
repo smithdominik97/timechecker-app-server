@@ -51,7 +51,6 @@ if($journey == null){
           
     }
 
-    print_r($tripArray);
     echo json_encode($tripArray);
     
     //foreach ($journey->GetStationBoardResult->trainServices->service[0]->subsequentCallingPoints->callingPointList[0]->callingPoint as $arrival) {
