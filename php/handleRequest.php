@@ -27,21 +27,15 @@ if($journey == null){
     echo "No data found";
     return;
 } else {
-//    print_r($journey);
-//    echo "Departure: \n";
-//    echo "  Departure from: " . $journey->GetStationBoardResult->locationName . " leaves at: " . $journey->GetStationBoardResult->trainServices->service[0]->std;
-//    echo "\nArrival: \n"; 
-//    echo "  Arrival from: " . $journey->GetStationBoardResult->locationName . " arrives at: " . $journey->GetStationBoardResult->trainServices->service[0]->subsequentCallingPoints->callingPointList[0]->callingPoint[6]->st;
+;
     //print_r($journey);
     $departureName = $journey->GetStationBoardResult->locationName;
     // loops through the array of locations to find the the correct one
     foreach($journey->GetStationBoardResult->trainServices->service as $services) {
-           // echo "Departing from: " . $departureName . ", at: " . $services->std . " on Platform " .$services->platform . "\n\n";
             foreach($services->subsequentCallingPoints->callingPointList[0]->callingPoint as $callingPoints) {
                 if($callingPoints->crs == $destination) { 
-                    $singleTrip = array("departureName"=>$departureName, "depPlatform"=>$services->platform, "depTime"=>$services->std, "arrivalName"=>$callingPoints->locationName, "st"=>$callingPoints->st);
+                    $singleTrip = array("depName"=>$departureName, "depPlatform"=>$services->platform, "depSt"=>$services->std, "depEt"=>$services->etd ,"destName"=>$callingPoints->locationName, "destSt"=>$callingPoints->st, "destEt"=>$callingPoints->et);
                     array_push($tripArray, $singleTrip);
-             //       echo "Arriving at : " . $callingPoints->locationName . ", at: " . $callingPoints->st . "\n";
 
                 }
         }
@@ -51,14 +45,5 @@ if($journey == null){
 
     echo json_encode($tripArray);
     
-    //foreach ($journey->GetStationBoardResult->trainServices->service[0]->subsequentCallingPoints->callingPointList[0]->callingPoint as $arrival) {
-    //            if ($arrival->crs == $destination) {
-    //                echo " Arrival from: " . $arrival->locationName . " arrives at: " . $arrival->st;
-    //                $encodedString = json_encode($journey);
-    //                $response = array("result"=>1, "error"=>"no error", "tripInfo"=>$encodedString);
-    //                echo json_encode($response);
-    //            }
- 
-    //} 
-  }
+ }
 }// end else block
