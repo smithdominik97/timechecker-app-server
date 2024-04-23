@@ -39,7 +39,7 @@ if($journey == null){
            // echo "Departing from: " . $departureName . ", at: " . $services->std . " on Platform " .$services->platform . "\n\n";
             foreach($services->subsequentCallingPoints->callingPointList[0]->callingPoint as $callingPoints) {
                 if($callingPoints->crs == $destination) { 
-                    $singleTrip = array("departureName"=>$departureName, "platform"=>$services->platform, "std"=>$services->std, "arrivalName"=>$callingPoints->locationName, "st"=>$callingPoints->st);
+                    $singleTrip = array("departureName"=>$departureName, "depPlatform"=>$services->platform, "depTime"=>$services->std, "arrivalName"=>$callingPoints->locationName, "st"=>$callingPoints->st);
                     array_push($tripArray, $singleTrip);
              //       echo "Arriving at : " . $callingPoints->locationName . ", at: " . $callingPoints->st . "\n";
 
